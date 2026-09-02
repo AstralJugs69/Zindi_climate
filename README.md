@@ -117,6 +117,7 @@ crhp run robust-validate
 crhp run robust-candidates
 crhp run structured-validate
 crhp run power-validate
+crhp run demographic-validate
 crhp run suite
 crhp run candidates
 crhp run tune-catboost

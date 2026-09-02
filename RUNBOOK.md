@@ -51,6 +51,7 @@ crhp run robust-validate
 crhp run robust-candidates
 crhp run structured-validate
 crhp run power-validate
+crhp run demographic-validate
 crhp run suite
 crhp run candidates
 crhp run tune-catboost
@@ -95,6 +96,12 @@ Current diagnostic stages:
   solar and pressure histories plus relative anomalies, and evaluates both repeated
   location-group target CV and adversarial train/test shift. Generated API cache and
   feature tables live under `reports/power_climate/` and are not committed to Git.
+- `demographic-validate`: low-shift model-shape search on the demographics/time view.
+  It compares the existing CatBoost reference with spline-regularized logistic
+  regression, ExtraTrees, histogram gradient boosting, and a deliberately smooth
+  100-neighbour classifier, all under the same repeated location-group folds, then
+  evaluates coarse probability blends. Use this after `power-validate` if external
+  climate does not beat the low-shift CatBoost baseline.
 
 ## Fresh Kaggle session
 

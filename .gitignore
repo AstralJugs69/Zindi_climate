@@ -27,6 +27,7 @@ reports/runs/
 reports/baselines/
 reports/model_suite/
 reports/catboost_tuning/
+reports/demographic_validation/
 reports/power_climate/
 
 # Organizer-provided notebook is reference material, not orchestration source.

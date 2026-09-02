@@ -8,6 +8,7 @@ import sys
 STAGES: dict[str, list[str]] = {
     "ablate": [sys.executable, "src/ablate_features.py"],
     "baseline": [sys.executable, "src/evaluate_baselines.py"],
+    "demographic-validate": [sys.executable, "src/demographic_validate.py"],
     "diagnose-shift": [sys.executable, "src/diagnose_shift.py"],
     "power-validate": [sys.executable, "src/power_climate_validate.py"],
     "robust-candidates": [sys.executable, "src/robust_candidates.py"],
