@@ -112,6 +112,7 @@ crhp hydrate
 ```bash
 crhp run baseline
 crhp run apc-prior-validate
+crhp run catboost-diversity-validate
 crhp run diagnose-shift
 crhp run ablate
 crhp run robust-validate

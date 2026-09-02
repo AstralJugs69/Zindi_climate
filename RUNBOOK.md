@@ -46,6 +46,7 @@ crhp update
 crhp hydrate
 crhp run baseline
 crhp run apc-prior-validate
+crhp run catboost-diversity-validate
 crhp run diagnose-shift
 crhp run ablate
 crhp run robust-validate
@@ -84,6 +85,12 @@ Add new experiments as normal Python modules/scripts and then register them in
 that file. Do not add ad-hoc notebook-only workflows.
 
 Current diagnostic stages:
+
+- `catboost-diversity-validate`: repeated 3x5 location-group CV on the low-shift
+  `all_ctr1` feature set across manually declared CatBoost regimes: Plain versus
+  Ordered boosting, depths 4-7, and different regularization strengths. It records
+  fold best iterations and evaluates coarse OOF probability blends. This replaces
+  the older `tune-catboost` stage for the current low-shift branch; no AutoML is used.
 
 - `apc-prior-validate`: fold-safe continuous empirical-Bayes age/period/cohort risk
   surfaces. Unlike the rejected categorical target encodings, these priors use

@@ -27,6 +27,7 @@ reports/runs/
 reports/baselines/
 reports/model_suite/
 reports/catboost_tuning/
+reports/catboost_diversity_validation/
 reports/age_expert_validation/
 reports/demographic_validation/
 reports/fine_demo_validation/

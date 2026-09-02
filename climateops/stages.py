@@ -10,6 +10,7 @@ STAGES: dict[str, list[str]] = {
     "apc-prior-validate": [sys.executable, "src/apc_prior_validate.py"],
     "age-expert-validate": [sys.executable, "src/age_expert_validate.py"],
     "baseline": [sys.executable, "src/evaluate_baselines.py"],
+    "catboost-diversity-validate": [sys.executable, "src/catboost_diversity_validate.py"],
     "chirps-validate": [sys.executable, "src/chirps_validate.py"],
     "cohort-candidates": [sys.executable, "src/cohort_candidates.py"],
     "demographic-validate": [sys.executable, "src/demographic_validate.py"],
