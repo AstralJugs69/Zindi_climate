@@ -123,6 +123,7 @@ crhp run interaction-validate
 crhp run interaction-select
 crhp run interaction-candidates
 crhp run profile-validate
+crhp run age-expert-validate
 crhp run suite
 crhp run candidates
 crhp run tune-catboost

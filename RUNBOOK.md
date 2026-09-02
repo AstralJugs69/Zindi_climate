@@ -57,6 +57,7 @@ crhp run interaction-validate
 crhp run interaction-select
 crhp run interaction-candidates
 crhp run profile-validate
+crhp run age-expert-validate
 crhp run suite
 crhp run candidates
 crhp run tune-catboost
@@ -135,6 +136,11 @@ Current diagnostic stages:
   location climate summaries. Train and test location profiles are built separately,
   no target values are used, and every configuration is checked with repeated
   location-group CV plus adversarial train/test AUC.
+- `age-expert-validate`: low-shift specialist-model search on the current
+  `all_ctr1` demographic interaction feature space. It trains separate CatBoost
+  experts for under-5 / older, three-stage, and four-stage age partitions inside
+  each location-group fold, then evaluates expert-only and global/expert blends.
+  Routing uses observed age only; no target-derived routing or geography is added.
 
 ## Fresh Kaggle session
 

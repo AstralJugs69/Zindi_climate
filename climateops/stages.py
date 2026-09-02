@@ -7,6 +7,7 @@ import sys
 # Python modules/scripts in the repo; no notebook state is required.
 STAGES: dict[str, list[str]] = {
     "ablate": [sys.executable, "src/ablate_features.py"],
+    "age-expert-validate": [sys.executable, "src/age_expert_validate.py"],
     "baseline": [sys.executable, "src/evaluate_baselines.py"],
     "chirps-validate": [sys.executable, "src/chirps_validate.py"],
     "demographic-validate": [sys.executable, "src/demographic_validate.py"],
