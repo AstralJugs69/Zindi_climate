@@ -1,5 +1,9 @@
 # Climate Risk & Health Prediction — Kaggle-first workspace
 
+> **Operational memory:** before working on this repository, read
+> [`RUNBOOK.md`](RUNBOOK.md). It documents the exact Kaggle bootstrap/update/
+> resume/sync lifecycle, project invariants, and competition-specific rules.
+
 This repository is designed so a Kaggle VM can be treated as disposable compute.
 The repository is the source of truth for **code**; Kaggle Inputs provide the Zindi
 files; an optional private Kaggle Dataset stores **runtime checkpoints, models,
@@ -202,4 +206,3 @@ know the Kaggle Dataset slug or mount folder. The files are ignored by Git.
 
 This separation is what makes a completely new Kaggle VM recoverable using only
 the bootstrap command and `crhp resume`.
-
