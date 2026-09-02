@@ -55,6 +55,7 @@ crhp run chirps-validate
 crhp run demographic-validate
 crhp run interaction-validate
 crhp run interaction-select
+crhp run interaction-candidates
 crhp run suite
 crhp run candidates
 crhp run tune-catboost
@@ -116,6 +117,11 @@ Current diagnostic stages:
   `interaction-validate` and evaluates coarse blends among base, categorical,
   numeric, and all-interaction CatBoost configurations. Run this before creating a
   new leaderboard candidate so blend weights are chosen from OOF evidence.
+- `interaction-candidates`: leaderboard candidate generator for the selected
+  interaction branch. It CV-bags categorical, numeric, and all-interaction CatBoost
+  components over the same 3x5 location-group folds and writes the selected 75/25
+  categorical/numeric blend, the higher-AUC 50/50 categorical/all blend, and the
+  low-shift `all_ctr1` reference submission.
 - `interaction-validate`: target-free demographic interaction search. It adds
   age-band × zone/year/month, gender × age/time, age × year, and vulnerable-group ×
   seasonal interactions, and also tests CatBoost categorical-combination depth.

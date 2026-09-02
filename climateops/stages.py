@@ -13,6 +13,7 @@ STAGES: dict[str, list[str]] = {
     "diagnose-shift": [sys.executable, "src/diagnose_shift.py"],
     "interaction-validate": [sys.executable, "src/interaction_validate.py"],
     "interaction-select": [sys.executable, "src/interaction_select.py"],
+    "interaction-candidates": [sys.executable, "src/interaction_candidates.py"],
     "power-validate": [sys.executable, "src/power_climate_validate.py"],
     "robust-candidates": [sys.executable, "src/robust_candidates.py"],
     "robust-validate": [sys.executable, "src/robust_validate.py"],
