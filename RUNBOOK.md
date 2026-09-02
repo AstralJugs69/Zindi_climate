@@ -68,8 +68,8 @@ that file. Do not add ad-hoc notebook-only workflows.
 For a public GitHub repository:
 
 ```bash
-python -c "import urllib.request; urllib.request.urlretrieve('https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/bootstrap_kaggle.py','/kaggle/working/bootstrap_kaggle.py')"
-python /kaggle/working/bootstrap_kaggle.py --repo-url https://github.com/YOUR_USER/YOUR_REPO.git
+python -c "import urllib.request; urllib.request.urlretrieve('https://raw.githubusercontent.com/AstralJugs69/Zindi_climate/main/bootstrap_kaggle.py','/kaggle/working/bootstrap_kaggle.py')"
+python /kaggle/working/bootstrap_kaggle.py --repo-url https://github.com/AstralJugs69/Zindi_climate.git
 cd /kaggle/working/climate-risk-health-prediction
 crhp status
 ```
@@ -167,7 +167,7 @@ Authentication must come from the Kaggle Secret `GITHUB_TOKEN`.
 Environment/secrets:
 
 ```text
-CRHP_REPO_URL=https://github.com/YOUR_USER/YOUR_REPO.git
+CRHP_REPO_URL=https://github.com/AstralJugs69/Zindi_climate.git
 CRHP_BRANCH=main
 GITHUB_TOKEN=<Kaggle Secret, required for private clone or push>
 CRHP_ARTIFACT_DATASET=YOUR_KAGGLE_USER/YOUR_PRIVATE_CHECKPOINT_DATASET
@@ -286,4 +286,3 @@ When resuming this project in another conversation:
 8. Use `crhp sync` rather than inventing another Git workflow.
 9. Keep secrets and Zindi files out of Git.
 10. Preserve compatibility with `crhp bootstrap` + `crhp resume` on a fresh VM.
-

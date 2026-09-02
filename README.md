@@ -42,8 +42,8 @@ written into `.git/config`.
 The project expects a normal GitHub remote named `origin` and branch `main`.
 Once this folder has been pushed to GitHub, set these Kaggle values:
 
-- `CRHP_REPO_URL` — clean HTTPS clone URL, for example
-  `https://github.com/you/climate-risk-health-prediction.git`
+- `CRHP_REPO_URL` — clean HTTPS clone URL:
+  `https://github.com/AstralJugs69/Zindi_climate.git`
 - `CRHP_BRANCH` — normally `main`
 - `GITHUB_TOKEN` — **Kaggle Secret**, only required for a private repo or pushes
 - `CRHP_ARTIFACT_DATASET` — optional private Kaggle Dataset handle such as
@@ -57,8 +57,8 @@ For a public repo, download the standalone bootstrapper from the repository's ra
 GitHub URL and run it. Replace the URL once with your actual repository URL:
 
 ```bash
-python -c "import urllib.request; urllib.request.urlretrieve('https://raw.githubusercontent.com/YOUR_USER/YOUR_REPO/main/bootstrap_kaggle.py','/kaggle/working/bootstrap_kaggle.py')"
-python /kaggle/working/bootstrap_kaggle.py --repo-url https://github.com/YOUR_USER/YOUR_REPO.git
+python -c "import urllib.request; urllib.request.urlretrieve('https://raw.githubusercontent.com/AstralJugs69/Zindi_climate/main/bootstrap_kaggle.py','/kaggle/working/bootstrap_kaggle.py')"
+python /kaggle/working/bootstrap_kaggle.py --repo-url https://github.com/AstralJugs69/Zindi_climate.git
 ```
 
 For a private repository, make `bootstrap_kaggle.py` available to the notebook as
