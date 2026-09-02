@@ -45,11 +45,13 @@ crhp status
 crhp update
 crhp hydrate
 crhp run baseline
+crhp run apc-prior-validate
 crhp run diagnose-shift
 crhp run ablate
 crhp run robust-validate
 crhp run robust-candidates
 crhp run structured-validate
+crhp run teleconnection-validate
 crhp run power-validate
 crhp run chirps-validate
 crhp run cohort-candidates
@@ -82,6 +84,16 @@ Add new experiments as normal Python modules/scripts and then register them in
 that file. Do not add ad-hoc notebook-only workflows.
 
 Current diagnostic stages:
+
+- `apc-prior-validate`: fold-safe continuous empirical-Bayes age/period/cohort risk
+  surfaces. Unlike the rejected categorical target encodings, these priors use
+  Gaussian smoothing over age/year/birth-cohort and are blended as a separate OOF
+  probability component rather than injected into CatBoost. Validation locations are
+  completely excluded when each prior is built.
+- `teleconnection-validate`: climate-only NOAA Indian Ocean Dipole (DMI) and Nino 3.4
+  experiment motivated by East African malaria literature. It tests monthly DMI/ENSO
+  lags and 3-month means on the low-shift cohort model and reports adversarial
+  train/test AUC. NOAA series are cached under `reports/teleconnection_validation/`.
 
 - `diagnose-shift`: adversarial train-vs-test validation, including progressively
   less spatial information, to identify distribution shift before leaderboard use.

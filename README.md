@@ -111,11 +111,13 @@ crhp hydrate
 
 ```bash
 crhp run baseline
+crhp run apc-prior-validate
 crhp run diagnose-shift
 crhp run ablate
 crhp run robust-validate
 crhp run robust-candidates
 crhp run structured-validate
+crhp run teleconnection-validate
 crhp run power-validate
 crhp run chirps-validate
 crhp run cohort-candidates

@@ -32,6 +32,8 @@ reports/demographic_validation/
 reports/fine_demo_validation/
 reports/power_climate/
 reports/profile_validation/
+reports/apc_prior_validation/
+reports/teleconnection_validation/
 reports/temporal_density_validation/
 reports/interaction_validation/
 reports/lagged_climate_validation/
