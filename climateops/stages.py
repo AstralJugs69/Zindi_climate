@@ -9,6 +9,7 @@ STAGES: dict[str, list[str]] = {
     "ablate": [sys.executable, "src/ablate_features.py"],
     "baseline": [sys.executable, "src/evaluate_baselines.py"],
     "diagnose-shift": [sys.executable, "src/diagnose_shift.py"],
+    "robust-validate": [sys.executable, "src/robust_validate.py"],
     "suite": [sys.executable, "src/evaluate_model_suite.py"],
     "candidates": [sys.executable, "src/train_candidates.py"],
     "tune-catboost": [sys.executable, "src/tune_catboost.py"],

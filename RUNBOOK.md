@@ -47,6 +47,7 @@ crhp hydrate
 crhp run baseline
 crhp run diagnose-shift
 crhp run ablate
+crhp run robust-validate
 crhp run suite
 crhp run candidates
 crhp run tune-catboost
@@ -71,6 +72,9 @@ Current diagnostic stages:
   less spatial information, to identify distribution shift before leaderboard use.
 - `ablate`: location-group CV across full, no-location, no-spatial, no-interaction,
   no-climate, and demographics/time-only feature views.
+- `robust-validate`: repeated location-group CV across multiple split seeds for the
+  two preferred low-shift feature spaces (`demographics_time` and `no_spatial`),
+  comparing CatBoost, LightGBM, XGBoost, Logistic Regression, and coarse blends.
 
 ## Fresh Kaggle session
 
