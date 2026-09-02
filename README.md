@@ -120,6 +120,7 @@ crhp run power-validate
 crhp run chirps-validate
 crhp run demographic-validate
 crhp run interaction-validate
+crhp run interaction-select
 crhp run suite
 crhp run candidates
 crhp run tune-catboost

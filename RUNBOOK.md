@@ -54,6 +54,7 @@ crhp run power-validate
 crhp run chirps-validate
 crhp run demographic-validate
 crhp run interaction-validate
+crhp run interaction-select
 crhp run suite
 crhp run candidates
 crhp run tune-catboost
@@ -111,6 +112,10 @@ Current diagnostic stages:
   100-neighbour classifier, all under the same repeated location-group folds, then
   evaluates coarse probability blends. Use this after `power-validate` if external
   climate does not beat the low-shift CatBoost baseline.
+- `interaction-select`: zero-retraining selection step that reads the OOF files from
+  `interaction-validate` and evaluates coarse blends among base, categorical,
+  numeric, and all-interaction CatBoost configurations. Run this before creating a
+  new leaderboard candidate so blend weights are chosen from OOF evidence.
 - `interaction-validate`: target-free demographic interaction search. It adds
   age-band × zone/year/month, gender × age/time, age × year, and vulnerable-group ×
   seasonal interactions, and also tests CatBoost categorical-combination depth.
