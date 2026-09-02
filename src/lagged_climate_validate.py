@@ -14,6 +14,7 @@ from ablate_features import make_view
 from features import ID_COL, TARGET, categorical_columns, load_competition_data
 from interaction_validate import add_interactions
 from metrics import official_metrics
+from power_climate_validate import RAIN_CANDIDATES, _api_json, _parameter_frame
 from robust_validate import SPLIT_SEEDS
 
 
@@ -31,6 +32,7 @@ def _download_site_weather(raw: pd.DataFrame, cache_path: Path) -> pd.DataFrame:
     if cache_path.exists():
         frame = pd.read_csv(cache_path)
         frame["date"] = pd.to_datetime(frame["date"], errors="raise")
+        frame.attrs["source"] = "Open-Meteo ERA5-Land"
         return frame
 
     cache_path.parent.mkdir(parents=True, exist_ok=True)
@@ -59,6 +61,8 @@ def _download_site_weather(raw: pd.DataFrame, cache_path: Path) -> pd.DataFrame:
     for attempt in range(5):
         try:
             response = requests.get(API_URL, params=params, timeout=120)
+            if response.status_code == 429:
+                raise requests.HTTPError("Open-Meteo rate limited this Kaggle IP (HTTP 429)")
             response.raise_for_status()
             payload = response.json()
             daily = payload["daily"]
@@ -68,6 +72,7 @@ def _download_site_weather(raw: pd.DataFrame, cache_path: Path) -> pd.DataFrame:
             if frame[list(DAILY_VARS)].isna().mean().max() > 0.05:
                 raise RuntimeError("Open-Meteo returned excessive missing daily values")
             frame.to_csv(cache_path, index=False)
+            frame.attrs["source"] = "Open-Meteo ERA5-Land"
             print(
                 f"Cached ERA5-Land site series at requested centroid lat={lat:.5f}, lon={lon:.5f}; "
                 f"resolved grid lat={payload.get('latitude')}, lon={payload.get('longitude')}",
@@ -76,10 +81,65 @@ def _download_site_weather(raw: pd.DataFrame, cache_path: Path) -> pd.DataFrame:
             return frame
         except Exception as exc:
             last_exc = exc
+            if "429" in str(exc) or "rate limit" in str(exc).lower():
+                break
             if attempt == 4:
                 break
             time.sleep(min(2 ** attempt, 12))
-    raise RuntimeError(f"Open-Meteo ERA5-Land request failed: {last_exc}")
+
+    print(f"Open-Meteo unavailable ({last_exc}); falling back to NASA POWER daily data", flush=True)
+    return _download_power_site_weather(raw, cache_path.with_name("nasa_power_site_daily.csv"))
+
+
+def _download_power_site_weather(raw: pd.DataFrame, cache_path: Path) -> pd.DataFrame:
+    if cache_path.exists():
+        frame = pd.read_csv(cache_path)
+        frame["date"] = pd.to_datetime(frame["date"], errors="raise")
+        frame.attrs["source"] = "NASA POWER"
+        return frame
+
+    cache_path.parent.mkdir(parents=True, exist_ok=True)
+    lat = float(raw["latitude"].astype(float).median())
+    lon = float(raw["longitude"].astype(float).median())
+    dates = pd.to_datetime(raw["deathdate"], errors="raise")
+    start = (dates.min() - pd.Timedelta(days=100)).strftime("%Y%m%d")
+    end = (dates.max() - pd.Timedelta(days=1)).strftime("%Y%m%d")
+
+    met = _parameter_frame(
+        _api_json(lat, lon, start, end, ("T2M_MAX", "T2M", "T2M_MIN"))
+    )
+    rain = None
+    for candidate in RAIN_CANDIDATES:
+        try:
+            candidate_frame = _parameter_frame(
+                _api_json(lat, lon, start, end, (candidate,))
+            )
+            if candidate in candidate_frame.columns:
+                rain = candidate_frame[candidate]
+                break
+        except Exception as exc:
+            print(f"  NASA POWER rainfall parameter {candidate} unavailable: {exc}", flush=True)
+    if rain is None:
+        raise RuntimeError("NASA POWER fallback could not retrieve precipitation")
+
+    frame = pd.DataFrame(
+        {
+            "date": met.index,
+            "temperature_2m_max": met["T2M_MAX"].to_numpy(),
+            "temperature_2m_mean": met["T2M"].to_numpy(),
+            "temperature_2m_min": met["T2M_MIN"].to_numpy(),
+            "precipitation_sum": rain.reindex(met.index).to_numpy(),
+        }
+    ).dropna(subset=["date"])
+    if frame[list(DAILY_VARS)].isna().mean().max() > 0.05:
+        raise RuntimeError("NASA POWER fallback returned excessive missing daily values")
+    frame.to_csv(cache_path, index=False)
+    frame.attrs["source"] = "NASA POWER"
+    print(
+        f"Cached NASA POWER site series at lat={lat:.5f}, lon={lon:.5f}",
+        flush=True,
+    )
+    return frame
 
 
 def _slice(weather: pd.DataFrame, start: pd.Timestamp, end: pd.Timestamp) -> pd.DataFrame:
@@ -291,6 +351,9 @@ def main():
     raw_train = train.drop(columns=[TARGET]).reset_index(drop=True)
     raw_all = pd.concat([raw_train, test.reset_index(drop=True)], ignore_index=True)
     weather = _download_site_weather(raw_all, out_dir / "openmeteo_era5_land_site_daily.csv")
+    weather_source = str(weather.attrs.get("source", "unknown"))
+    (out_dir / "weather_source.txt").write_text(weather_source + "\n", encoding="utf-8")
+    print(f"Lagged climate weather source: {weather_source}", flush=True)
     lagged = _weekly_features(raw_all, weather).reset_index(drop=True)
     lagged.to_csv(out_dir / "lagged_climate_features.csv", index=False)
     lag_train = lagged.iloc[: len(train)].reset_index(drop=True)
