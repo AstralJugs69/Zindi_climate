@@ -49,6 +49,7 @@ crhp run diagnose-shift
 crhp run ablate
 crhp run robust-validate
 crhp run robust-candidates
+crhp run structured-validate
 crhp run suite
 crhp run candidates
 crhp run tune-catboost
@@ -82,6 +83,11 @@ Current diagnostic stages:
   lowest train/test shift. A 50/50 CatBoost + no-spatial Logistic Regression blend
   and a 75/25 CatBoost/XGBoost diversity file are also written. Use this stage
   instead of the older `candidates` stage for leaderboard-ready files.
+- `structured-validate`: repeated location-group validation of strictly fold-safe
+  smoothed target priors for year, age, season and demographic interactions, with
+  optional distance-weighted target priors from *other* training locations. Fit-row
+  target encodings are leave-one-out; spatial priors exclude the row's whole own
+  location so validation still simulates unseen test locations.
 
 ## Fresh Kaggle session
 

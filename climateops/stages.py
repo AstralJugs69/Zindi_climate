@@ -11,6 +11,7 @@ STAGES: dict[str, list[str]] = {
     "diagnose-shift": [sys.executable, "src/diagnose_shift.py"],
     "robust-candidates": [sys.executable, "src/robust_candidates.py"],
     "robust-validate": [sys.executable, "src/robust_validate.py"],
+    "structured-validate": [sys.executable, "src/structured_validate.py"],
     "suite": [sys.executable, "src/evaluate_model_suite.py"],
     "candidates": [sys.executable, "src/train_candidates.py"],
     "tune-catboost": [sys.executable, "src/tune_catboost.py"],
