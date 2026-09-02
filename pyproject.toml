@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "climate-risk-health-prediction"
+version = "0.1.0"
+description = "Command-driven Kaggle competition workspace for Zindi Climate Risk and Health Prediction."
+requires-python = ">=3.10"
+
+[project.scripts]
+crhp = "climateops.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["climateops*", "src*"]
+

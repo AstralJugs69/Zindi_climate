@@ -1,0 +1,11 @@
+# Keep this intentionally small. Kaggle already ships the scientific Python stack.
+# These are the packages our competition pipeline relies on explicitly.
+catboost>=1.2
+lightgbm>=4.5
+xgboost>=2.1
+scikit-learn>=1.5
+pandas>=2.2
+numpy>=1.26
+pyarrow>=17
+kagglehub>=1.0.2
+

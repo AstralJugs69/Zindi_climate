@@ -1,0 +1,35 @@
+# Local / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+
+# Python environments
+.venv/
+venv/
+.env
+
+# Competition data must never be committed
+data/raw/
+data/processed/
+*.parquet
+
+# Runtime state and large artifacts are persisted separately on Kaggle
+.crhp/
+models/*
+!models/.gitkeep
+submissions/*.csv
+reports/runs/
+reports/baselines/
+reports/model_suite/
+reports/catboost_tuning/
+
+# Organizer-provided notebook is reference material, not orchestration source.
+notebooks/climate_health_starter_notebook.ipynb
+
+# Notebook runtime cruft
+.ipynb_checkpoints/
