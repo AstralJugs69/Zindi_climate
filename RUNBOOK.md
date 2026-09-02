@@ -57,6 +57,7 @@ crhp run fine-demo-validate
 crhp run interaction-validate
 crhp run interaction-select
 crhp run interaction-candidates
+crhp run low-shift-select
 crhp run profile-validate
 crhp run age-expert-validate
 crhp run suite
@@ -131,6 +132,11 @@ Current diagnostic stages:
   components over the same 3x5 location-group folds and writes the selected 75/25
   categorical/numeric blend, the higher-AUC 50/50 categorical/all blend, and the
   low-shift `all_ctr1` reference submission.
+- `low-shift-select`: zero-retraining cross-family OOF blend search across the
+  successful interaction and fine-demographic branches. It evaluates coarse pairwise
+  blends plus a small pre-declared set of three-way blends centered on `all_ctr1`.
+  Run this after both `interaction-validate` and `fine-demo-validate` before creating
+  another leaderboard candidate.
 - `interaction-validate`: target-free demographic interaction search. It adds
   age-band × zone/year/month, gender × age/time, age × year, and vulnerable-group ×
   seasonal interactions, and also tests CatBoost categorical-combination depth.
