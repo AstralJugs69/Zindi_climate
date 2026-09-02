@@ -61,6 +61,7 @@ crhp run interaction-candidates
 crhp run low-shift-select
 crhp run profile-validate
 crhp run age-expert-validate
+crhp run temporal-density-validate
 crhp run suite
 crhp run candidates
 crhp run tune-catboost
@@ -159,6 +160,14 @@ Current diagnostic stages:
   experts for under-5 / older, three-stage, and four-stage age partitions inside
   each location-group fold, then evaluates expert-only and global/expert blends.
   Routing uses observed age only; no target-derived routing or geography is added.
+- `temporal-density-validate`: research-driven, target-free mortality-event context.
+  It uses only the provided Train/Test covariates to describe how many *other* deaths
+  occur near each death date over 7/14/28/56/84/168-day windows, including age/sex
+  composition, recent-vs-background burst ratios, and a seasonal 28-day event z-score.
+  A symmetric retrospective variant and a lean zone-context variant are tested
+  separately. The row's own death is subtracted from direct count windows, no target
+  values or external health records are used, and every configuration is evaluated
+  with repeated location-group CV plus adversarial train/test AUC.
 
 ## Fresh Kaggle session
 
