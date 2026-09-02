@@ -52,6 +52,7 @@ crhp run robust-candidates
 crhp run structured-validate
 crhp run power-validate
 crhp run chirps-validate
+crhp run cohort-candidates
 crhp run demographic-validate
 crhp run fine-demo-validate
 crhp run interaction-validate
@@ -111,6 +112,10 @@ Current diagnostic stages:
   anomalies. It compares relative-only versus all CHIRPS features using repeated
   location-group CV and train/test adversarial AUC. Cache/output lives under
   `reports/chirps/` and is intentionally ignored by Git.
+- `cohort-candidates`: CV-bagged leaderboard generator for the low-shift cohort branch.
+  It trains the `all_ctr1` reference and `cohort_calendar` feature sets over the same
+  3x5 location-group folds, then writes 25/75, 50/50, and 75/25 probability blends.
+  All submissions keep the fixed 0.5 classification threshold required by Zindi.
 - `demographic-validate`: low-shift model-shape search on the demographics/time view.
   It compares the existing CatBoost reference with spline-regularized logistic
   regression, ExtraTrees, histogram gradient boosting, and a deliberately smooth

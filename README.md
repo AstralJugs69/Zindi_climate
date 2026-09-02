@@ -118,6 +118,7 @@ crhp run robust-candidates
 crhp run structured-validate
 crhp run power-validate
 crhp run chirps-validate
+crhp run cohort-candidates
 crhp run demographic-validate
 crhp run fine-demo-validate
 crhp run interaction-validate
