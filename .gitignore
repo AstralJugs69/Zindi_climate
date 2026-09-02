@@ -29,6 +29,7 @@ reports/model_suite/
 reports/catboost_tuning/
 reports/demographic_validation/
 reports/power_climate/
+reports/chirps/
 
 # Organizer-provided notebook is reference material, not orchestration source.
 notebooks/climate_health_starter_notebook.ipynb

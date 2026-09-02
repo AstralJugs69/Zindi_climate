@@ -51,6 +51,7 @@ crhp run robust-validate
 crhp run robust-candidates
 crhp run structured-validate
 crhp run power-validate
+crhp run chirps-validate
 crhp run demographic-validate
 crhp run suite
 crhp run candidates
@@ -96,6 +97,13 @@ Current diagnostic stages:
   solar and pressure histories plus relative anomalies, and evaluates both repeated
   location-group target CV and adversarial train/test shift. Generated API cache and
   feature tables live under `reports/power_climate/` and are not committed to Git.
+- `chirps-validate`: high-resolution rainfall branch using the public ClimateSERV
+  CHIRPS API. It caches one long daily rainfall series per unique competition
+  coordinate, then derives 7/14/30/56/84/90/120/180/365-day accumulation/intensity,
+  wet/heavy-rain fractions, recent-vs-background ratios, and matched prior-year
+  anomalies. It compares relative-only versus all CHIRPS features using repeated
+  location-group CV and train/test adversarial AUC. Cache/output lives under
+  `reports/chirps/` and is intentionally ignored by Git.
 - `demographic-validate`: low-shift model-shape search on the demographics/time view.
   It compares the existing CatBoost reference with spline-regularized logistic
   regression, ExtraTrees, histogram gradient boosting, and a deliberately smooth
