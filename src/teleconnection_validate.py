@@ -20,7 +20,7 @@ from robust_validate import SPLIT_SEEDS
 
 
 DMI_URL = "https://psl.noaa.gov/data/timeseries/month/data/dmi.had.long.csv"
-NINO34_URL = "https://psl.noaa.gov/data/correlation/nina34.anom.csv"
+NINO34_URL = "https://psl.noaa.gov/data/timeseries/month/data/nino34.long.anom.csv"
 
 
 def _download_text(url: str, path: Path) -> str:
@@ -104,10 +104,22 @@ def _monthly_series(text: str, name: str) -> pd.DataFrame:
 
 def _load_indices(out_dir: Path) -> pd.DataFrame:
     dmi = _monthly_series(_download_text(DMI_URL, out_dir / "dmi.csv"), "dmi")
-    nino = _monthly_series(_download_text(NINO34_URL, out_dir / "nino34.csv"), "nino34")
+    # Use a versioned cache name so an older/incomplete NOAA endpoint response from
+    # a previous run cannot silently survive after the source URL changes.
+    nino = _monthly_series(
+        _download_text(NINO34_URL, out_dir / "nino34_hadisst_long.csv"),
+        "nino34",
+    )
     merged = dmi.merge(nino, on="month", how="inner").sort_values("month").reset_index(drop=True)
     if len(merged) < 500:
         raise RuntimeError("Merged NOAA teleconnection history is unexpectedly short")
+    print(
+        "NOAA teleconnection coverage: "
+        f"DMI {dmi['month'].min()}..{dmi['month'].max()}, "
+        f"Nino3.4 {nino['month'].min()}..{nino['month'].max()}, "
+        f"merged {merged['month'].min()}..{merged['month'].max()}",
+        flush=True,
+    )
     return merged
 
 
