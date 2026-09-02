@@ -114,6 +114,7 @@ crhp run baseline
 crhp run diagnose-shift
 crhp run ablate
 crhp run robust-validate
+crhp run robust-candidates
 crhp run suite
 crhp run candidates
 crhp run tune-catboost
