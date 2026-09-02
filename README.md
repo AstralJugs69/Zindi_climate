@@ -125,6 +125,7 @@ crhp run interaction-validate
 crhp run interaction-select
 crhp run interaction-candidates
 crhp run low-shift-select
+crhp run lagged-climate-validate
 crhp run profile-validate
 crhp run age-expert-validate
 crhp run temporal-density-validate

@@ -34,6 +34,7 @@ reports/power_climate/
 reports/profile_validation/
 reports/temporal_density_validation/
 reports/interaction_validation/
+reports/lagged_climate_validation/
 reports/chirps/
 
 # Organizer-provided notebook is reference material, not orchestration source.

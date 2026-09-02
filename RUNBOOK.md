@@ -59,6 +59,7 @@ crhp run interaction-validate
 crhp run interaction-select
 crhp run interaction-candidates
 crhp run low-shift-select
+crhp run lagged-climate-validate
 crhp run profile-validate
 crhp run age-expert-validate
 crhp run temporal-density-validate
@@ -143,6 +144,15 @@ Current diagnostic stages:
   blends plus a small pre-declared set of three-way blends centered on `all_ctr1`.
   Run this after both `interaction-validate` and `fine-demo-validate` before creating
   another leaderboard candidate.
+- `lagged-climate-validate`: literature-driven climate validation based on published
+  Iganga-Mayuge HDSS malaria studies. Kaggle downloads one common site-centroid
+  ERA5-Land daily series from Open-Meteo, then creates non-overlapping weekly lags
+  0-12 for maximum/mean/minimum temperature and rainfall. Focused features encode
+  the published 2-8 week rainfall case window, 5-11 week maximum-temperature
+  mortality window, under-5 lag-8 temperature effect, 5-14-year lag-4-8 effect,
+  male 5-14 effect modification, plus short-lag extreme heat/rain anomalies. Using
+  one site-wide series deliberately avoids village geography as a Train/Test marker.
+  Every mode is checked with repeated location-group CV and adversarial shift AUC.
 - `interaction-validate`: target-free demographic interaction search. It adds
   age-band × zone/year/month, gender × age/time, age × year, and vulnerable-group ×
   seasonal interactions, and also tests CatBoost categorical-combination depth.

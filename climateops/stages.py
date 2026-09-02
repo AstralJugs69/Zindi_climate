@@ -18,6 +18,7 @@ STAGES: dict[str, list[str]] = {
     "interaction-select": [sys.executable, "src/interaction_select.py"],
     "interaction-candidates": [sys.executable, "src/interaction_candidates.py"],
     "low-shift-select": [sys.executable, "src/low_shift_select.py"],
+    "lagged-climate-validate": [sys.executable, "src/lagged_climate_validate.py"],
     "power-validate": [sys.executable, "src/power_climate_validate.py"],
     "profile-validate": [sys.executable, "src/profile_validate.py"],
     "robust-candidates": [sys.executable, "src/robust_candidates.py"],
