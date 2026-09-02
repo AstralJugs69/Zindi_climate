@@ -56,6 +56,7 @@ crhp run demographic-validate
 crhp run interaction-validate
 crhp run interaction-select
 crhp run interaction-candidates
+crhp run profile-validate
 crhp run suite
 crhp run candidates
 crhp run tune-catboost
@@ -127,6 +128,13 @@ Current diagnostic stages:
   seasonal interactions, and also tests CatBoost categorical-combination depth.
   It uses the same repeated location-group CV and reports train/test adversarial AUC
   so any apparent gain that comes from distribution shift is rejected.
+- `profile-validate`: target-free transductive location-profile search. It represents
+  unseen locations through unlabeled case-mix summaries (age, gender, season and
+  record-count structure), then optionally adds collection-period summaries and
+  within-location climate deviations. A full-profile variant also includes absolute
+  location climate summaries. Train and test location profiles are built separately,
+  no target values are used, and every configuration is checked with repeated
+  location-group CV plus adversarial train/test AUC.
 
 ## Fresh Kaggle session
 

@@ -29,6 +29,7 @@ reports/model_suite/
 reports/catboost_tuning/
 reports/demographic_validation/
 reports/power_climate/
+reports/profile_validation/
 reports/interaction_validation/
 reports/chirps/
 

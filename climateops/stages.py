@@ -15,6 +15,7 @@ STAGES: dict[str, list[str]] = {
     "interaction-select": [sys.executable, "src/interaction_select.py"],
     "interaction-candidates": [sys.executable, "src/interaction_candidates.py"],
     "power-validate": [sys.executable, "src/power_climate_validate.py"],
+    "profile-validate": [sys.executable, "src/profile_validate.py"],
     "robust-candidates": [sys.executable, "src/robust_candidates.py"],
     "robust-validate": [sys.executable, "src/robust_validate.py"],
     "structured-validate": [sys.executable, "src/structured_validate.py"],

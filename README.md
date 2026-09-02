@@ -122,6 +122,7 @@ crhp run demographic-validate
 crhp run interaction-validate
 crhp run interaction-select
 crhp run interaction-candidates
+crhp run profile-validate
 crhp run suite
 crhp run candidates
 crhp run tune-catboost
