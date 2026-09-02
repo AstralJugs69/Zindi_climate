@@ -128,9 +128,9 @@ def main():
     ns_xgb = cv_bag_test_predictions(train, test, "no_spatial", "xgboost")
 
     candidates = {
-        "v101_robust_primary_cat50_log50.csv": 0.50 * dt_cat + 0.50 * ns_log,
-        "v102_robust_diversity_cat75_xgb25.csv": 0.75 * dt_cat + 0.25 * ns_xgb,
-        "v103_demographics_time_catboost.csv": dt_cat,
+        "v101_demographics_time_catboost.csv": dt_cat,
+        "v102_robust_blend_cat50_log50.csv": 0.50 * dt_cat + 0.50 * ns_log,
+        "v103_robust_diversity_cat75_xgb25.csv": 0.75 * dt_cat + 0.25 * ns_xgb,
     }
 
     diagnostics = []
@@ -161,11 +161,12 @@ def main():
 
     metadata = {
         "validation_reference": {
-            "primary_blend": "0.50 demographics_time catboost + 0.50 no_spatial logistic",
-            "observed_robust_oof_score": 0.818682,
+            "primary": "demographics_time catboost",
+            "observed_robust_oof_score": 0.818729,
+            "secondary_blend": "0.50 demographics_time catboost + 0.50 no_spatial logistic",
+            "observed_robust_oof_score_secondary": 0.818682,
             "diversity_blend": "0.75 demographics_time catboost + 0.25 no_spatial xgboost",
             "observed_robust_oof_score_diversity": 0.818663,
-            "pure_demographics_time_catboost_score": 0.818729,
         },
         "inference": {
             "strategy": "3x5 StratifiedGroupKFold CV bagging by location",

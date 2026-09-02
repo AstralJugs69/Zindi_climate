@@ -77,11 +77,11 @@ Current diagnostic stages:
   two preferred low-shift feature spaces (`demographics_time` and `no_spatial`),
   comparing CatBoost, LightGBM, XGBoost, Logistic Regression, and coarse blends.
 - `robust-candidates`: generate CV-bagged test predictions using the same 3x5
-  location-group split design as `robust-validate`. The primary file is a 50/50
-  blend of demographics/time CatBoost and no-spatial Logistic Regression; a 75/25
-  CatBoost/XGBoost diversity file and pure demographics/time CatBoost reference
-  are also written. Use this stage instead of the older `candidates` stage for
-  leaderboard-ready files.
+  location-group split design as `robust-validate`. The primary file is pure
+  demographics/time CatBoost because it has both the best robust score and the
+  lowest train/test shift. A 50/50 CatBoost + no-spatial Logistic Regression blend
+  and a 75/25 CatBoost/XGBoost diversity file are also written. Use this stage
+  instead of the older `candidates` stage for leaderboard-ready files.
 
 ## Fresh Kaggle session
 
