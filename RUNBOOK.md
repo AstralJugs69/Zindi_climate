@@ -50,6 +50,7 @@ crhp run ablate
 crhp run robust-validate
 crhp run robust-candidates
 crhp run structured-validate
+crhp run power-validate
 crhp run suite
 crhp run candidates
 crhp run tune-catboost
@@ -88,6 +89,12 @@ Current diagnostic stages:
   optional distance-weighted target priors from *other* training locations. Fit-row
   target encodings are leave-one-out; spatial priors exclude the row's whole own
   location so validation still simulates unseen test locations.
+- `power-validate`: the current external-signal branch. Kaggle downloads and caches
+  NASA POWER daily meteorology for the competition's half-degree climate cells,
+  builds 14/30/56/84/180/365-day temperature, rainfall, humidity, wind, wet-bulb,
+  solar and pressure histories plus relative anomalies, and evaluates both repeated
+  location-group target CV and adversarial train/test shift. Generated API cache and
+  feature tables live under `reports/power_climate/` and are not committed to Git.
 
 ## Fresh Kaggle session
 
