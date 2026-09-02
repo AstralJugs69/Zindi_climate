@@ -9,7 +9,14 @@ import pandas as pd
 from catboost import CatBoostClassifier
 from sklearn.model_selection import StratifiedGroupKFold, StratifiedKFold
 
-from features import ID_COL, TARGET, engineer_features, feature_columns, load_competition_data
+from features import (
+    ID_COL,
+    TARGET,
+    categorical_columns,
+    engineer_features,
+    feature_columns,
+    load_competition_data,
+)
 from metrics import official_metrics
 
 
@@ -33,7 +40,7 @@ def run_cv(train: pd.DataFrame, split_name: str, include_location: bool, class_w
     y = train[TARGET].astype(int).to_numpy()
     cols = feature_columns(X)
     X = X[cols]
-    cat_cols = X.select_dtypes(include=["object", "category"]).columns.tolist()
+    cat_cols = categorical_columns(X)
 
     if split_name == "stratified":
         splitter = StratifiedKFold(n_splits=5, shuffle=True, random_state=2026)

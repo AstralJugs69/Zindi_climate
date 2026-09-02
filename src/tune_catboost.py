@@ -7,7 +7,14 @@ import pandas as pd
 from catboost import CatBoostClassifier
 from sklearn.model_selection import StratifiedGroupKFold
 
-from features import ID_COL, TARGET, engineer_features, feature_columns, load_competition_data
+from features import (
+    ID_COL,
+    TARGET,
+    categorical_columns,
+    engineer_features,
+    feature_columns,
+    load_competition_data,
+)
 from metrics import official_metrics
 
 
@@ -25,7 +32,7 @@ def main():
     X = X[feature_columns(X)]
     y = train[TARGET].to_numpy()
     groups = train["location"].astype(str).to_numpy()
-    cats = X.select_dtypes(include=["object", "str", "category"]).columns.tolist()
+    cats = categorical_columns(X)
     out_dir = Path("reports/catboost_tuning")
     out_dir.mkdir(parents=True, exist_ok=True)
     rows = []

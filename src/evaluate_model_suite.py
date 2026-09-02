@@ -11,12 +11,19 @@ from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from xgboost import XGBClassifier
 
-from features import ID_COL, TARGET, engineer_features, feature_columns, load_competition_data
+from features import (
+    ID_COL,
+    TARGET,
+    categorical_columns,
+    engineer_features,
+    feature_columns,
+    load_competition_data,
+)
 from metrics import official_metrics
 
 
 def preprocess_fold(x_train, x_valid, scale_numeric=False):
-    cat_cols = x_train.select_dtypes(include=["object", "str", "category"]).columns.tolist()
+    cat_cols = categorical_columns(x_train)
     num_cols = [c for c in x_train.columns if c not in cat_cols]
     numeric_transform = StandardScaler() if scale_numeric else "passthrough"
     pre = ColumnTransformer(

@@ -82,3 +82,17 @@ def engineer_features(df: pd.DataFrame, include_location: bool = True) -> pd.Dat
 
 def feature_columns(df: pd.DataFrame):
     return [c for c in df.columns if c not in {TARGET, ID_COL}]
+
+
+def categorical_columns(df: pd.DataFrame) -> list[str]:
+    """Return categorical/string columns in a pandas-version-safe way."""
+    cols: list[str] = []
+    for column in df.columns:
+        dtype = df[column].dtype
+        if (
+            isinstance(dtype, pd.CategoricalDtype)
+            or pd.api.types.is_object_dtype(dtype)
+            or pd.api.types.is_string_dtype(dtype)
+        ):
+            cols.append(column)
+    return cols

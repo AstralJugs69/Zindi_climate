@@ -7,7 +7,14 @@ import numpy as np
 import pandas as pd
 from catboost import CatBoostClassifier
 
-from features import ID_COL, TARGET, engineer_features, feature_columns, load_competition_data
+from features import (
+    ID_COL,
+    TARGET,
+    categorical_columns,
+    engineer_features,
+    feature_columns,
+    load_competition_data,
+)
 
 
 PRIMARY_PARAMS = dict(
@@ -69,7 +76,7 @@ def main():
     X = X[cols]
     Xt = Xt[cols]
     y = train[TARGET].astype(int).to_numpy()
-    cats = X.select_dtypes(include=["object", "str", "category"]).columns.tolist()
+    cats = categorical_columns(X)
 
     out_dir = Path("submissions")
     out_dir.mkdir(parents=True, exist_ok=True)
