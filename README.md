@@ -111,6 +111,8 @@ crhp hydrate
 
 ```bash
 crhp run baseline
+crhp run diagnose-shift
+crhp run ablate
 crhp run suite
 crhp run candidates
 crhp run tune-catboost

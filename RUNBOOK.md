@@ -45,6 +45,8 @@ crhp status
 crhp update
 crhp hydrate
 crhp run baseline
+crhp run diagnose-shift
+crhp run ablate
 crhp run suite
 crhp run candidates
 crhp run tune-catboost
@@ -62,6 +64,13 @@ climateops/stages.py
 
 Add new experiments as normal Python modules/scripts and then register them in
 that file. Do not add ad-hoc notebook-only workflows.
+
+Current diagnostic stages:
+
+- `diagnose-shift`: adversarial train-vs-test validation, including progressively
+  less spatial information, to identify distribution shift before leaderboard use.
+- `ablate`: location-group CV across full, no-location, no-spatial, no-interaction,
+  no-climate, and demographics/time-only feature views.
 
 ## Fresh Kaggle session
 
