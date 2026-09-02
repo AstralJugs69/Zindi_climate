@@ -12,6 +12,7 @@ STAGES: dict[str, list[str]] = {
     "chirps-validate": [sys.executable, "src/chirps_validate.py"],
     "demographic-validate": [sys.executable, "src/demographic_validate.py"],
     "diagnose-shift": [sys.executable, "src/diagnose_shift.py"],
+    "fine-demo-validate": [sys.executable, "src/fine_demo_validate.py"],
     "interaction-validate": [sys.executable, "src/interaction_validate.py"],
     "interaction-select": [sys.executable, "src/interaction_select.py"],
     "interaction-candidates": [sys.executable, "src/interaction_candidates.py"],

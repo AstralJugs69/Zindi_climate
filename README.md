@@ -119,6 +119,7 @@ crhp run structured-validate
 crhp run power-validate
 crhp run chirps-validate
 crhp run demographic-validate
+crhp run fine-demo-validate
 crhp run interaction-validate
 crhp run interaction-select
 crhp run interaction-candidates

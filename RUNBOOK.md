@@ -53,6 +53,7 @@ crhp run structured-validate
 crhp run power-validate
 crhp run chirps-validate
 crhp run demographic-validate
+crhp run fine-demo-validate
 crhp run interaction-validate
 crhp run interaction-select
 crhp run interaction-candidates
@@ -115,6 +116,12 @@ Current diagnostic stages:
   100-neighbour classifier, all under the same repeated location-group folds, then
   evaluates coarse probability blends. Use this after `power-validate` if external
   climate does not beat the low-shift CatBoost baseline.
+- `fine-demo-validate`: low-shift refinement of the successful interaction branch.
+  It keeps all rows in one CatBoost model while adding fine age categories,
+  approximate birth cohort, categorical calendar/season fields, and selected
+  age/cohort × zone/year/season interactions. No labels, location names, or
+  coordinates are used to construct these features; repeated location-group CV and
+  adversarial train/test AUC are reported for every configuration.
 - `interaction-select`: zero-retraining selection step that reads the OOF files from
   `interaction-validate` and evaluates coarse blends among base, categorical,
   numeric, and all-interaction CatBoost configurations. Run this before creating a

@@ -29,6 +29,7 @@ reports/model_suite/
 reports/catboost_tuning/
 reports/age_expert_validation/
 reports/demographic_validation/
+reports/fine_demo_validation/
 reports/power_climate/
 reports/profile_validation/
 reports/interaction_validation/
